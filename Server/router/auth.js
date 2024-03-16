@@ -44,7 +44,11 @@ router.post("/signin", async (req, res) => {
 
       const token = await userLogin.generateAuthToken();
 
-      res.cookie("jwtoken", token, { httpOnly: true });
+      res.cookie("jwtoken", token, {
+        expires: new Date(Date.now() + 25892000000),
+        httpOnly: true,
+        path: "/",
+      });
 
       if (!isMatch) {
         res.status(400).json({ error: "Inalid details" });

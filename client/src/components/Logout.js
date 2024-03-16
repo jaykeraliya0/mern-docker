@@ -8,7 +8,7 @@ const Logout = () => {
   const history = useHistory();
 
   useEffect(() => {
-    fetch("/logout", {
+    fetch("http://localhost:5000/logout", {
       method: "GET",
       headers: {
         Accept: "appllication/json",

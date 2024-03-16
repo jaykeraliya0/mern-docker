@@ -6,7 +6,7 @@ const Home = () => {
 
   const userHomePage = async () => {
     try {
-      const res = await fetch("/getdata", {
+      const res = await fetch("http://localhost:5000/getdata", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

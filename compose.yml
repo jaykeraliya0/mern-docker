@@ -1,0 +1,39 @@
+version: "3"
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE=mongodb://mongo:27017/mydatabase
+    depends_on:
+      - mongo
+    networks:
+      - mern-network
+    ports:
+      - "5000:5000"
+    restart: on-failure
+    # restart_delay: 5000
+    command: ["npm", "start", "--", "--disable-host-check"]
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    networks:
+      - mern-network
+    ports:
+      - "80:80"
+
+  mongo:
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    networks:
+      - mern-network
+    ports:
+      - "27017:27017"
+
+networks:
+  mern-network:
+    driver: bridge
